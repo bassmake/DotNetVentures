@@ -1,3 +1,3 @@
-# DotNetExperiments
+# DotNetBlog
 
-Experiments in .NET platform.
+Blogging about experiences with .NET platform.
