@@ -30,8 +30,9 @@ twitter_username: MMatejovsky
 github_username: bassmake
 
 # Build settings
-#theme: pages-themes/architect@v0.2.0
-theme: minima
+#theme: minima
+#theme: architect
+remote_theme: pages-themes/architect@v0.2.0
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
