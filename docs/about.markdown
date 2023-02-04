@@ -4,15 +4,13 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+My name is Miroslav Matejovsky and I have been working as an Software Architect for few years now.
+In the past I've been writing code that was running on the JVM, now I am exploring world of .NET.
+This blog was created to help me write down my ventures and experiences with this exciting platform.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+![Me](./images/me.jpg)
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
+Built with [jekyll][jekyll-organization] and served via [github pages][github-pages].
 
 [jekyll-organization]: https://github.com/jekyll
+[github-pages]: https://pages.github.com/
