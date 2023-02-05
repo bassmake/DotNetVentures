@@ -27,13 +27,19 @@ public class UdpTest
             .AddHostedService<Worker>()
             .BuildServiceProvider();
         
+        const string message = "Hell NO!";
+        
         var cts = new CancellationTokenSource();
         
         var worker = provider.GetService<IHostedService>() as Worker;
         var task = worker?.StartAsync(cts.Token)!;
 
         var client = new UdpClient(Worker.ListenPort + 1);
-        await client.SendAsync("Hell no!".ToBytes(), new IPEndPoint(IPAddress.Any, Worker.ListenPort), cts.Token);
+        await client.SendAsync(message.ToBytes(), new IPEndPoint(IPAddress.Any, Worker.ListenPort), CancellationToken.None);
+
+        var received = await client.ReceiveAsync(CancellationToken.None);
+        
+        received.Buffer.ToAscii().ShouldBe(message.Reversed());
         
         await Task.Delay(TimeSpan.FromSeconds(1), CancellationToken.None);
         cts.Cancel();

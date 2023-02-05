@@ -14,7 +14,7 @@ public static class StringExtensions
         return Encoding.ASCII.GetBytes(from);
     }
     
-    public static string Reverse(this string input)
+    public static string Reversed(this string input)
     {
         var charArray = input.ToCharArray();
         Array.Reverse(charArray);

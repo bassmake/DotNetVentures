@@ -24,6 +24,9 @@ public class Worker : BackgroundService
                 var result = await listener.ReceiveAsync(stoppingToken);
                 var data = result.Buffer.ToAscii();
                 _logger.LogInformation("Received broadcast from {EndPoint}: {Data}", result.RemoteEndPoint, data);
+
+                await listener.SendAsync(data.Reversed().ToBytes(), result.RemoteEndPoint, stoppingToken);
+                _logger.LogInformation("Reversed string sent back to {EndPoint}", result.RemoteEndPoint);
             }
         }
         catch (SocketException e)
