@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -17,23 +16,16 @@ public class Worker : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         using var listener = new UdpClient(ListenPort);
-        var groupEP = new IPEndPoint(IPAddress.Any, ListenPort);
         try
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Waiting for broadcast on {GroupEP}", groupEP);
-                
-                // var bytes = listener.Receive(ref groupEP);
+                _logger.LogInformation("Waiting for broadcast on port: {Port}", ListenPort);
 
-                // _logger.LogInformation("Received broadcast from {GroupEP} :", groupEP);
-                // _logger.LogInformation(" {Received}", Encoding.ASCII.GetString(bytes, 0, bytes.Length));
-                
                 var result = await listener.ReceiveAsync(stoppingToken);
-                _logger.LogInformation("Received broadcast from {IpEndPoint} :", result.RemoteEndPoint);
-                
                 var bytes = result.Buffer;
-                _logger.LogInformation(" {Info}", Encoding.ASCII.GetString(bytes, 0, bytes.Length));
+                var data = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+                _logger.LogInformation("Received broadcast from {EndPoint}: {Data}", result.RemoteEndPoint, data);
             }
         }
         catch (SocketException e)

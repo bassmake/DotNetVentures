@@ -21,7 +21,7 @@ public class UdpTest
     }
 
     [Test]
-    public async Task Sending_simple_UDP()
+    public async Task Sending_simple_datagram()
     {
         var provider = new ServiceCollection()
             .AddLogging(lb => lb.AddSerilog())
@@ -33,21 +33,14 @@ public class UdpTest
         var worker = provider.GetService<IHostedService>() as Worker;
         var task = worker?.StartAsync(cts.Token)!;
 
-        var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        // var broadcast = IPAddress.Parse("192.168.1.255");
-        // var broadcast = IPAddress.Parse("0.0.0.0");
-        
-        // new Socket()
         var client = new UdpClient(Worker.ListenPort + 1);
         var sendBuf = Encoding.ASCII.GetBytes("Hell no!");
-
-        var groupEP = new IPEndPoint(IPAddress.Any, Worker.ListenPort);
-        await client.SendAsync(sendBuf, groupEP, cts.Token);
-        // await socket.SendAsync(sendBuf, SocketFlags.Broadcast, cts.Token);
+        
+        await client.SendAsync(sendBuf, new IPEndPoint(IPAddress.Any, Worker.ListenPort), cts.Token);
         
         await Task.Delay(TimeSpan.FromSeconds(1), CancellationToken.None);
-        
         cts.Cancel();
+        
         task.Status.ShouldBe(TaskStatus.RanToCompletion);
     }
 }
