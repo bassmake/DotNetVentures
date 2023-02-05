@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="UDP.Server: UdpServer" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-    <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/UDP/UDP.Server/UDP.Server.csproj" />
+  <configuration default="false" name="Ventures.Service" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+    <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Ventures.Service/Ventures.Service.csproj" />
     <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
-    <option name="LAUNCH_PROFILE_NAME" value="UdpServer" />
+    <option name="LAUNCH_PROFILE_NAME" value="Ventures.Service" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
