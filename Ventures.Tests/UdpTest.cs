@@ -1,6 +1,5 @@
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -34,9 +33,7 @@ public class UdpTest
         var task = worker?.StartAsync(cts.Token)!;
 
         var client = new UdpClient(Worker.ListenPort + 1);
-        var sendBuf = Encoding.ASCII.GetBytes("Hell no!");
-        
-        await client.SendAsync(sendBuf, new IPEndPoint(IPAddress.Any, Worker.ListenPort), cts.Token);
+        await client.SendAsync("Hell no!".ToBytes(), new IPEndPoint(IPAddress.Any, Worker.ListenPort), cts.Token);
         
         await Task.Delay(TimeSpan.FromSeconds(1), CancellationToken.None);
         cts.Cancel();

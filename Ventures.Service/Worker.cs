@@ -1,5 +1,4 @@
 using System.Net.Sockets;
-using System.Text;
 
 namespace Ventures.Service;
 
@@ -23,8 +22,7 @@ public class Worker : BackgroundService
                 _logger.LogInformation("Waiting for broadcast on port: {Port}", ListenPort);
 
                 var result = await listener.ReceiveAsync(stoppingToken);
-                var bytes = result.Buffer;
-                var data = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+                var data = result.Buffer.ToAscii();
                 _logger.LogInformation("Received broadcast from {EndPoint}: {Data}", result.RemoteEndPoint, data);
             }
         }
